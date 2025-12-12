@@ -133,5 +133,5 @@ else:
 LOGIN_REDIRECT_URL = '/news'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 CSRF_TRUSTED_ORIGINS = [
-    'https://newswebsite-production.up.railway.app',
+    'https://newswebsite-production-276b.up.railway.app',
 ]
