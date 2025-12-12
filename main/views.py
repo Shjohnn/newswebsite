@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.db.models import Count
 from .models import *
-
+from django.db.models import Q
 
 def index(request):
     new_news = News.objects.all().first()
@@ -39,7 +39,7 @@ def news_detail(request, slug):
     comments = Comment.objects.filter(
         news=news,
         is_approved=True
-    ).order_by('-created_at')
+    ).order_by('-created_at')[:3]
     most_read = News.objects.all().order_by('-views')[:5]
 
 
@@ -98,7 +98,7 @@ def add_comment(request, slug):
                 name=name,
                 email=email,
                 message=message,
-                is_approved=False  # Admin tasdiqlashi kerak
+                is_approved=True  # Admin tasdiqlashi kerak
             )
 
             # Success xabari (messages framework'siz)
@@ -117,3 +117,17 @@ def add_comment(request, slug):
 
     # Agar GET request bo'lsa, yangilik sahifasiga yo'naltirish
     return redirect('home')
+
+
+def search_view(request):
+    query = request.GET.get('q')
+    results=[]
+    if query:
+        results = News.objects.filter(
+            Q(title__icontains=query) | Q(content__icontains=query)
+        )
+    context = {
+        'results':results,
+        'query':query,
+    }
+    return render(request, 'search.html', context)

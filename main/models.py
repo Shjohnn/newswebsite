@@ -147,7 +147,7 @@ class Comment(models.Model):
     name = models.CharField(max_length=100, verbose_name="Ism")
     email = models.EmailField(verbose_name="Email")
     message = models.TextField(verbose_name="Xabar")
-    is_approved = models.BooleanField(default=False, verbose_name="Tasdiqlangan")
+    is_approved = models.BooleanField(default=True, verbose_name="Tasdiqlangan")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Yaratilgan")
 
     class Meta:
@@ -177,24 +177,24 @@ class ContactMessage(models.Model):
         return f"{self.name} - {self.subject[:30]}"
 
 
-class Comment(models.Model):
-    """Izoh modeli"""
-    news = models.ForeignKey(
-        News,
-        on_delete=models.CASCADE,
-        related_name='comments',
-        verbose_name="Yangilik"
-    )
-    name = models.CharField(max_length=100, verbose_name="Ism")
-    email = models.EmailField(verbose_name="Email")
-    message = models.TextField(verbose_name="Xabar")
-    is_approved = models.BooleanField(default=False, verbose_name="Tasdiqlangan")
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Yaratilgan")
-
-    class Meta:
-        verbose_name = "Izoh"
-        verbose_name_plural = "Izohlar"
-        ordering = ['-created_at']
-
-    def __str__(self):
-        return f"{self.name} - {self.news.title[:30]}"
+# class Comment(models.Model):
+#     """Izoh modeli"""
+#     news = models.ForeignKey(
+#         News,
+#         on_delete=models.CASCADE,
+#         related_name='comments',
+#         verbose_name="Yangilik"
+#     )
+#     name = models.CharField(max_length=100, verbose_name="Ism")
+#     email = models.EmailField(verbose_name="Email")
+#     message = models.TextField(verbose_name="Xabar")
+#     is_approved = models.BooleanField(default=False, verbose_name="Tasdiqlangan")
+#     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Yaratilgan")
+#
+#     class Meta:
+#         verbose_name = "Izoh"
+#         verbose_name_plural = "Izohlar"
+#         ordering = ['-created_at']
+#
+#     def __str__(self):
+#         return f"{self.name} - {self.news.title[:30]}"
