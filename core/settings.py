@@ -133,6 +133,8 @@ else:
 LOGIN_REDIRECT_URL = '/news'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 CSRF_TRUSTED_ORIGINS = [
-    'https://newswebsite-production-276b.up.railway.app/admin',
+    'https://newswebsite-production-276b.up.railway.app',
+    'https://*.up.railway.app',
 ]
+
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
